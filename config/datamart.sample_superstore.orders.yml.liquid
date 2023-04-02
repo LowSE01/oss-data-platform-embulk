@@ -1,0 +1,71 @@
+# @formatter:off
+in:
+{% include 'include/connection/datawarehouse' %}
+  query: |
+    select        orders.row_id,
+                  orders.order_id,
+                  orders.order_date,
+                  orders.ship_date,
+                  ship_modes.ship_mode,
+                  customers.customer_id,
+                  customers.customer_name,
+                  customers.segment,
+                  cities.country,
+                  cities.region,
+                  cities.city,
+                  cities.state,
+                  orders.postal_code,
+                  cities.region_id,
+                  products.product_id,
+                  products.category,
+                  products.sub_category,
+                  products.product_name,
+                  orders.sales,
+                  orders.quantity,
+                  orders.discount,
+                  orders.profit,
+                  regional_managers.regional_manager,
+                  returns.returned
+
+    from          sample_superstore_orders                      orders
+      left join   sample_superstore_products                    products
+        on        products.product_id = orders.product_id
+      left join   sample_superstore_customers                   customers
+        on        customers.customer_id = orders.customer_id
+      left join   sample_superstore_cities                      cities
+        on        cities.city_id = orders.city_id
+      left join   sample_superstore_ship_modes                  ship_modes
+        on        ship_modes.ship_mode_id = orders.ship_mode_id
+      left join   sample_superstore_regional_managers           regional_managers
+        on        regional_managers.region_id = cities.region_id
+      left join   sample_superstore_returns                     returns
+        on        returns.order_id = orders.order_id
+
+out:
+{% include 'include/connection/datamart' %}
+  mode: replace
+  table: sample_superstore_orders
+  column_options:
+    row_id: {type: "bigint not null"}
+    order_id: {type: "char(20)"}
+    order_date: {"date"}
+    ship_date: {"date"}
+    ship_mode: {"varchar(16)"}
+    customer_id: {"char(20)"}
+    customers_name: {type: "varchar(32)"}
+    segment: {"varchar(16)"}
+    country: {type: "varchar(32)"}
+    city: {type: "varchar(32)"}
+    state: {"varchar(32)"}
+    postal_code: {"varchar(8)"}
+    region: {"varchar(8)"}
+    product_id: {type: "bigint"}
+    category: {type: "varchar(32)"}
+    sub_category: {"varchar(16)"}
+    product_name: {"varchar(128)"}
+    sales: {type: "decimal"}
+    quantity: {type: "bigint"}
+    discount: {type: "decimal"}
+    profit: {type: "decimal"}
+    regional_manager: {"varchar(32)"}
+    returned: {"varchar(8)"}
