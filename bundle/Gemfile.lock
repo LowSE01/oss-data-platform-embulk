@@ -1,0 +1,24 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    embulk (0.9.23-java)
+      bundler (>= 1.10.6)
+      liquid (~> 4.0.0)
+      msgpack (~> 1.1.0)
+    embulk-input-mysql (0.10.1)
+    embulk-input-postgresql (0.10.1)
+    embulk-output-postgresql (0.8.7)
+    liquid (4.0.4)
+    msgpack (1.1.0-java)
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  embulk (= 0.9.23)
+  embulk-input-mysql (~> 0.10.1)
+  embulk-input-postgresql (~> 0.10.1)
+  embulk-output-postgresql (~> 0.8.7)
+
+BUNDLED WITH
+   1.16.0
