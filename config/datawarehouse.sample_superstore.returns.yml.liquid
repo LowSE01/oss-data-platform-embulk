@@ -1,0 +1,17 @@
+# @formatter:off
+in:
+{% include 'include/connection/datalake' %}
+  query: |
+    select        returns.return_id,
+                  returns.returned,
+                  returns.order_id
+    from          sample_superstore_returns                     returns
+
+out:
+{% include 'include/connection/datawarehouse' %}
+  mode: replace
+  table: sample_superstore_returns
+  column_options:
+    return_id: {"bigint not null"}
+    returned: {"varchar(8)"}
+    order_id: {"char(20)"}

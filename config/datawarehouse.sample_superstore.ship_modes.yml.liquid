@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/datalake' %}
+  query: |
+    select        ship_modes.ship_mode_id                       as ship_mode_id,
+                  ship_modes.ship_mode                          as ship_mode
+    from          sample_superstore_ship_modes                  ship_modes
+
+out:
+{% include 'include/connection/datawarehouse' %}
+  mode: replace
+  table: sample_superstore_ship_modes
+  column_options:
+    ship_mode_id: {"bigint not null"}
+    ship_mode: {"varchar(16)"}

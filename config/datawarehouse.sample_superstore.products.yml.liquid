@@ -1,0 +1,23 @@
+# @formatter:off
+in:
+{% include 'include/connection/datalake' %}
+  query: |
+    select        products.product_id,
+                  products.product_name,
+                  sub_categories.sub_category,
+                  categories.category
+    from          sample_superstore_products                    products
+      left join   sample_superstore_sub_categories              sub_categories
+        on        sub_categories.sub_category_id = products.sub_category_id
+      left join   sample_superstore_categories categories
+        on        categories.category_id = sub_categories.category_id
+
+out:
+{% include 'include/connection/datawarehouse' %}
+  mode: replace
+  table: sample_superstore_products
+  column_options:
+    product_id: {"bigint not null"}
+    product_name: {"varchar(128)"}
+    sub_category: {"varchar(16)"}
+    category: {type: "varchar(32)"}

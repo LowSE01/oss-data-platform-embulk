@@ -1,0 +1,19 @@
+# @formatter:off
+in:
+{% include 'include/connection/datalake' %}
+  query: |
+    select        customers.customer_id,
+                  customers.customer_name,
+                  segments.segment
+    from          sample_superstore_customers                   customers
+      left join   sample_superstore_segments                    segments
+        on        segments.segment_id = customers.segment_id
+
+out:
+{% include 'include/connection/datawarehouse' %}
+  mode: replace
+  table: sample_superstore_customers
+  column_options:
+    customer_id: {type: "char(20) not null"}
+    customer_name: {type: "varchar(32)"}
+    segment: {"varchar(16)"}

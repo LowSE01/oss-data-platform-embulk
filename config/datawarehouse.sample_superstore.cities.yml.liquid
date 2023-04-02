@@ -1,0 +1,29 @@
+# @formatter:off
+in:
+{% include 'include/connection/datalake' %}
+  query: |
+    select        cities.city_id,
+                  cities.city,
+                  states.state,
+                  regions.region_id,
+                  regions.region,
+                  countries.country
+    from          sample_superstore_cities                      cities
+      left join   sample_superstore_states                      states
+        on        states.state_id = cities.state_id
+      left join   sample_superstore_regions                     regions
+        on        regions.region_id = states.region_id
+      left join   sample_superstore_countries                   countries
+        on        countries.country_id = regions.country_id
+
+out:
+{% include 'include/connection/datawarehouse' %}
+  mode: replace
+  table: sample_superstore_cities
+  column_options:
+    city_id: {type: "integer not null"}
+    city: {type: "varchar(32)"}
+    state: {"varchar(32)"}
+    region_id: {"bigint"}
+    region: {"varchar(8)"}
+    country: {type: "varchar(32)"}
