@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: regional_managers
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_regional_managers
+  column_options:
+    regional_manager_id: {"bigint not null"}
+    regional_manager: {"varchar(32)"}
+    region_id: {"bigint"}
+  create_table_constraint:
+    primary key (regional_manager_id)

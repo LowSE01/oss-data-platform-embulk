@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: regions
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_regions
+  column_options:
+    region_id: {"bigint not null"}
+    country_id: {"bigint"}
+    region: {"varchar(8)"}
+  create_table_constraint:
+    primary key (region_id)

@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: returns
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_returns
+  column_options:
+    return_id: {"bigint not null"}
+    returned: {"varchar(8)"}
+    order_id: {"char(20)"}
+  create_table_constraint:
+    primary key (return_id)

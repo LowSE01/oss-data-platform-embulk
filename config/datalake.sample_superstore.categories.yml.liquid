@@ -1,0 +1,14 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: categories
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_categories
+  column_options:
+    category_id: {type: "integer not null"}
+    category: {type: "varchar(32)"}
+  create_table_constraint:
+    primary key (category_id)

@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: products
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_products
+  column_options:
+    product_id: {"bigint not null"}
+    sub_category_id: {"bigint"}
+    product_name: {"varchar(128)"}
+  create_table_constraint:
+    primary key (product_id)

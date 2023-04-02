@@ -1,0 +1,19 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: orders
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_orders
+  column_options:
+    order_id: {"char(20) not null"}
+    order_date: {"date"}
+    ship_date: {"date"}
+    ship_mode_id: {"bigint"}
+    customer_id: {"char(20)"}
+    city_id: {"bigint"}
+    postal_code: {"varchar(8)"}
+  create_table_constraint:
+    primary key (order_id)

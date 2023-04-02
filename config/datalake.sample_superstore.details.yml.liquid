@@ -1,0 +1,19 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: details
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_details
+  column_options:
+    row_id: {type: "bigint not null"}
+    order_id: {type: "char(20)"}
+    product_id: {type: "bigint"}
+    sales: {type: "decimal"}
+    quantity: {type: "bigint"}
+    discount: {type: "decimal"}
+    profit: {type: "decimal"}
+  create_table_constraint:
+    primary key (row_id)

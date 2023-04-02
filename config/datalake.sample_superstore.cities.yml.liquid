@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: cities
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_cities
+  column_options:
+    city_id: {type: "integer not null"}
+    city: {type: "varchar(32)"}
+    state_id: {type: "integer"}
+  create_table_constraint:
+    primary key (city_id)

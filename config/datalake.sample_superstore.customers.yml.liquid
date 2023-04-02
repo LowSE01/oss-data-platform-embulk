@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: customers
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_customers
+  column_options:
+    customers_id: {type: "char(20) not null"}
+    customers_name: {type: "varchar(32)"}
+    segment_id: {type: "integer"}
+  create_table_constraint:
+    primary key (customer_id)

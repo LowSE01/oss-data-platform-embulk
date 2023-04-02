@@ -1,0 +1,14 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: segments
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_segments
+  column_options:
+    segment_id: {"bigint not null"}
+    segment: {"varchar(16)"}
+  create_table_constraint:
+    primary key (segment_id)

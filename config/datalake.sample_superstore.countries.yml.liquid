@@ -1,0 +1,14 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: countries
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_countries
+  column_options:
+    countries_id: {type: "integer not null"}
+    countries: {type: "varchar(32)"}
+  create_table_constraint:
+    primary key (country_id)

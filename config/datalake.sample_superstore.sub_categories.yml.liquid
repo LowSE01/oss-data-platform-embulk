@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: sub_categories
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_sub_categories
+  column_options:
+    sub_category_id: {"bigint not null"}
+    category_id: {"bigint"}
+    sub_category: {"varchar(16)"}
+  create_table_constraint:
+    primary key (sub_category_id)

@@ -1,0 +1,14 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: ship_modes
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_ship_modes
+  column_options:
+    ship_mode_id: {"bigint not null"}
+    ship_mode: {"varchar(16)"}
+  create_table_constraint:
+    primary key (ship_mode_id)

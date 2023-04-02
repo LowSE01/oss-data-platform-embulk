@@ -1,0 +1,15 @@
+# @formatter:off
+in:
+{% include 'include/connection/sample_superstore' %}
+  table: states
+
+out:
+{% include 'include/connection/datalake' %}
+  mode: replace
+  table: sample_superstore_states
+  column_options:
+    state_id: {"bigint not null"}
+    state: {"varchar(32)"}
+    region_id: {"bigint"}
+  create_table_constraint:
+    primary key (state_id)
